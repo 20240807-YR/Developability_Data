@@ -1,0 +1,106 @@
+{
+  "core2": {
+    "policy_summary": {
+      "exists": true,
+      "type": "json"
+    },
+    "prediction_trace": {
+      "exists": true,
+      "type": "csv",
+      "rows": 60,
+      "columns": [
+        "antibody_key",
+        "step",
+        "sequence_current",
+        "pred_score",
+        "pred_score_delta",
+        "decision",
+        "mutation_id_applied",
+        "intervention_count_cum"
+      ]
+    },
+    "mutation_applied_log": {
+      "exists": true,
+      "type": "csv",
+      "rows": 29,
+      "columns": [
+        "step",
+        "mutation_id",
+        "mutation_type",
+        "mutation_pos",
+        "from_aa",
+        "to_aa",
+        "sequence_before",
+        "sequence_after",
+        "antibody_key",
+        "candidate_group"
+      ]
+    },
+    "curieus_queue": {
+      "exists": true,
+      "type": "csv",
+      "rows": 29,
+      "columns": [
+        "antibody_key",
+        "step",
+        "sequence_after",
+        "mutation_id_applied",
+        "reason",
+        "curieus_job_id"
+      ]
+    }
+  },
+  "core3": {
+    "core3_ml_dataset": {
+      "exists": true,
+      "type": "csv",
+      "rows": 60,
+      "columns": [
+        "antibody_key",
+        "step",
+        "pred_score",
+        "rolling_mean_pred_score",
+        "rolling_std_pred_score",
+        "recent_mutation_count_k",
+        "cooldown_left",
+        "toggle_event"
+      ]
+    },
+    "instability_risk_with_trace": {
+      "exists": true,
+      "type": "csv",
+      "rows": 60,
+      "columns": [
+        "antibody_key",
+        "step",
+        "pred_score",
+        "rolling_mean_pred_score",
+        "rolling_std_pred_score",
+        "recent_mutation_count_k",
+        "cooldown_left",
+        "toggle_event",
+        "instability_risk"
+      ]
+    },
+    "core3_freeze_summary": {
+      "exists": true,
+      "type": "json"
+    }
+  },
+  "core4": {
+    "structural_failure_mapping": {
+      "exists": true,
+      "type": "json"
+    },
+    "core4_freeze_summary": {
+      "exists": true,
+      "type": "json"
+    }
+  },
+  "antibody_presence": {
+    "GDPa1-001": true,
+    "GDPa1-045": true,
+    "GDPa1-183": true
+  },
+  "note": "Core 5 failure analysis must rely only on the above inputs. No hidden data."
+}

@@ -1,0 +1,21 @@
+{
+  "core": "Core 4 — Structural Contrast",
+  "frozen_conclusion": [
+    "항체 설계 실패의 원인은 예측 정확도가 아니라 상태 계측 부재다.",
+    "동일한 예측-판단-개입 구조라도, 상태 계측 밀도가 안정성을 결정한다.",
+    "배터리 시스템은 상태를 중심으로 예측을 해석하지만, 항체 설계는 예측을 상태로 오인한다.",
+    "따라서 이 실패는 도메인 문제가 아니라 구조 문제다."
+  ],
+  "structural_failure_axes": [
+    "State Observability",
+    "Decision Buffering",
+    "Rule Interaction Complexity",
+    "Decision Trigger Definition"
+  ],
+  "context": {
+    "core3_dependency": "core3_freeze_summary.json",
+    "role_of_core4": "Structural contrast and failure interpretation",
+    "solution_proposal": false,
+    "notes": "Core 4 does not propose improvements. It reframes Core 3 failures as structural inevitabilities."
+  }
+}

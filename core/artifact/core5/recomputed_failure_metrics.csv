@@ -1,0 +1,5 @@
+antibody_key,toggle_count,total_steps,toggle_rate,mean_burst,max_burst,burst_count,final_intervention_count,mean_intervention_count
+GDPa1-001,10,20,0.5,1.8,3,5,9,4.5
+GDPa1-045,7,20,0.35,3.5,6,4,14,6.35
+GDPa1-183,8,20,0.4,1.5,3,4,6,2.65
+ALL,25,60,0.4166666666666667,2.230769230769231,6,13,14,4.5

@@ -1,0 +1,7 @@
+{
+  "core":"Core 4-01",
+  "key_finding":"State observability differs fundamentally between battery systems and antibody design.",
+  "battery_system":"State is directly measured and anchors decisions.",
+  "antibody_system":"No direct state variable; prediction substitutes for state.",
+  "implication":"Decision instability originates from missing state observability, not prediction accuracy."
+}

@@ -1,0 +1,12 @@
+{
+  "core5_status": "PASS",
+  "checked_files": {
+    "core5_inputs_manifest.json": true,
+    "recomputed_failure_metrics.csv": true,
+    "failure_matrix.csv": true,
+    "counterfactual_results.csv": true,
+    "failure_catalog.json": true,
+    "what_to_keep_for_submission.md": true
+  },
+  "note": "Core5 \uc2e4\ud328 \uc2e4\ud5d8\uc774 \uc120\ubcc4 \uae30\uc900\uacfc \ud568\uaed8 \uc7ac\ud604 \uac00\ub2a5 \uc0c1\ud0dc\ub85c \uace0\uc815\ub428"
+}

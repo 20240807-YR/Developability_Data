@@ -1,0 +1,97 @@
+{
+  "taxonomy": {
+    "T1_Boundary_Oscillation": "\uc784\uacc4 \ubd80\uadfc\uc5d0\uc11c HOLD/MUTATE\uac00 \ubc18\ubcf5\uc801\uc73c\ub85c \uc9c4\ub3d9",
+    "T2_Conflicting_Signals": "pred_score_delta\uc640 \ub204\uc801 \ub9e5\ub77d\uc774 \uc0c1\ucda9",
+    "T3_Burst_Cascade": "\uc5f0\uc18d MUTATE\uac00 \uae38\uac8c \ubc1c\uc0dd\ud558\uba70 \uac1c\uc785 \ud3ed\uc8fc",
+    "T4_Recovery_Overshoot": "\ud68c\ubcf5 \uc9c1\uc804(pred \uac1c\uc120 \uc9c1\ud6c4)\uc5d0 \uac1c\uc785 \ubc1c\uc0dd",
+    "T5_Rule_Interaction_Explosion": "\uaddc\uce59 \uac15\ud654 \uc774\ud6c4 toggle/burst \ub3d9\uc2dc \uc99d\uac00"
+  },
+  "entries": [
+    {
+      "antibody_key": "GDPa1-001",
+      "failure_types": [
+        "T1_Boundary_Oscillation",
+        "T3_Burst_Cascade",
+        "T4_Recovery_Overshoot"
+      ],
+      "toggle_rate": 0.45,
+      "burst_max": 3,
+      "example_steps": {
+        "T1_Boundary_Oscillation": [
+          1,
+          4,
+          7
+        ],
+        "T3_Burst_Cascade": [
+          1,
+          3,
+          1
+        ],
+        "T4_Recovery_Overshoot": [
+          4,
+          5,
+          6
+        ]
+      }
+    },
+    {
+      "antibody_key": "GDPa1-045",
+      "failure_types": [
+        "T1_Boundary_Oscillation",
+        "T3_Burst_Cascade",
+        "T4_Recovery_Overshoot"
+      ],
+      "toggle_rate": 0.3,
+      "burst_max": 6,
+      "example_steps": {
+        "T1_Boundary_Oscillation": [
+          2,
+          4,
+          5
+        ],
+        "T3_Burst_Cascade": [
+          2,
+          1,
+          6
+        ],
+        "T4_Recovery_Overshoot": [
+          1,
+          4,
+          8
+        ]
+      }
+    },
+    {
+      "antibody_key": "GDPa1-183",
+      "failure_types": [
+        "T1_Boundary_Oscillation",
+        "T3_Burst_Cascade",
+        "T4_Recovery_Overshoot"
+      ],
+      "toggle_rate": 0.35,
+      "burst_max": 3,
+      "example_steps": {
+        "T1_Boundary_Oscillation": [
+          1,
+          8,
+          9
+        ],
+        "T3_Burst_Cascade": [
+          1,
+          1,
+          3
+        ],
+        "T4_Recovery_Overshoot": [
+          8,
+          13,
+          14
+        ]
+      }
+    }
+  ],
+  "notes": [
+    "\ub77c\ubca8\uc740 \uad6c\uc870 \uc11c\uc220\uc6a9\uc774\uba70 \uc815\ub2f5 \ubd84\ub958\uac00 \uc544\ub2d8",
+    "\ub2e8\uc77c \uc2e4\ud5d8\uc774 \uc5ec\ub7ec \uc2e4\ud328 \uc720\ud615\uc744 \ub3d9\uc2dc\uc5d0 \uac00\uc9c8 \uc218 \uc788\uc74c",
+    "\ub300\ud45c step\uc740 \uc2dc\uac01\ud654/\uc2ac\ub77c\uc774\ub4dc \ucea1\ucc98 \uc6a9\ub3c4"
+  ]
+}

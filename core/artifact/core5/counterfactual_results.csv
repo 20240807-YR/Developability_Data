@@ -1,0 +1,7 @@
+counterfactual,antibody_key,noise_scale,toggle_rate,toggle_count,burst_mean,burst_max,interventions
+CF1_noise_almost_zero,GDPa1-001,1e-06,0.7,14,1.0,1,8
+CF1_noise_almost_zero,GDPa1-045,1e-06,0.7,14,1.0,1,8
+CF1_noise_almost_zero,GDPa1-183,1e-06,0.7,14,1.0,1,8
+CF2_noise_extreme,GDPa1-001,0.5,0.7,14,1.0,1,8
+CF2_noise_extreme,GDPa1-045,0.5,0.7,14,1.0,1,8
+CF2_noise_extreme,GDPa1-183,0.5,0.7,14,1.0,1,8
