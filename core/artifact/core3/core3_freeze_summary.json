@@ -1,0 +1,261 @@
+{
+  "core": "core3",
+  "artifact_generated_at": "2026-01-06T18:30:59",
+  "inputs": {
+    "rulegrid_trace_path": "../artifact/core3/prediction_trace_rulegrid.csv",
+    "rulegrid_diag_path": null,
+    "rulegrid_risk_path": "../artifact/core3/core3_rulegrid_instability_risk.csv",
+    "risk_info": {
+      "risk_source": "../artifact/core3/core3_rulegrid_instability_risk.csv",
+      "risk_available": false,
+      "note": "risk file missing"
+    },
+    "missing_trace_cols": []
+  },
+  "stop_reason_sentences_ko": [
+    "규칙(정책) 강화가 ‘개입 감소’로 수렴하지 않고, 오히려 MUTATE↔HOLD 전환(toggle)이 반복되며 의사결정이 흔들리는 패턴이 관측되었다.",
+    "규칙 강화가 진행될수록 연속 개입(burst) 구간이 짧아지거나 길어지는 방향이 일관되지 않았고, 개입이 ‘정리’되지 않은 채 누적되는 양상이 유지되었다.",
+    "예측 변동성(또는 pred_score_delta 변동)과 의사결정 엔트로피가 함께 증가하며, 규칙 추가가 해석 가능성을 높이지 못하고 ‘trace 복잡도’만 증가시키는 방향으로 나타났다.",
+    "따라서 실패 원인은 ‘규칙 부족’이 아니라, 예측 기반 트리거 구조가 가지는 정보 구조적 한계(불안정한 신호를 그대로 개입으로 변환하는 구조)로 고정된다."
+  ],
+  "evidence": {
+    "summary_stats": {
+      "corr_rulecount_toggle_rate": 0.11966953336253612,
+      "corr_rulecount_burst": -0.10620586102291502,
+      "corr_rulecount_entropy": 0.008684182551669738,
+      "corr_rulecount_delta_volatility": -0.18670125969873627
+    },
+    "contrast_low_vs_high_rulecount": {
+      "low_rulecount_mean_toggle_rate": 0.4711779448621555,
+      "high_rulecount_mean_toggle_rate": 0.5162907268170426,
+      "low_rulecount_mean_burst": 1.4633786848072563,
+      "high_rulecount_mean_burst": 1.2664021164021162,
+      "low_rulecount_mean_entropy": 0.8709650086264122,
+      "high_rulecount_mean_entropy": 0.8637081968042702
+    },
+    "variant_agg_preview_top10": [
+      {
+        "variant_id": "rule_v00",
+        "rule_count_proxy": 0,
+        "mean_toggle_rate": 0.3859649122807018,
+        "mean_num_bursts": 4.333333333333333,
+        "mean_mean_burst": 2.2666666666666666,
+        "mean_max_burst": 4.0,
+        "mean_total_mutations": 9.666666666666666,
+        "mean_delta_volatility": 0.02662743544228348,
+        "mean_decision_entropy": 0.9184520841468458
+      },
+      {
+        "variant_id": "rule_v01",
+        "rule_count_proxy": 1,
+        "mean_toggle_rate": 0.6315789473684211,
+        "mean_num_bursts": 6.333333333333333,
+        "mean_mean_burst": 1.0,
+        "mean_max_burst": 1.0,
+        "mean_total_mutations": 6.333333333333333,
+        "mean_delta_volatility": 0.029360403919039327,
+        "mean_decision_entropy": 0.8988832846094068
+      },
+      {
+        "variant_id": "rule_v02",
+        "rule_count_proxy": 2,
+        "mean_toggle_rate": 0.3684210526315789,
+        "mean_num_bursts": 3.6666666666666665,
+        "mean_mean_burst": 1.0,
+        "mean_max_burst": 1.0,
+        "mean_total_mutations": 3.6666666666666665,
+        "mean_delta_volatility": 0.028719626069973924,
+        "mean_decision_entropy": 0.684565498160823
+      },
+      {
+        "variant_id": "rule_v03",
+        "rule_count_proxy": 3,
+        "mean_toggle_rate": 0.43859649122807015,
+        "mean_num_bursts": 5.0,
+        "mean_mean_burst": 2.0722222222222224,
+        "mean_max_burst": 3.6666666666666665,
+        "mean_total_mutations": 10.333333333333334,
+        "mean_delta_volatility": 0.030066541180679238,
+        "mean_decision_entropy": 0.9732056544474839
+      },
+      {
+        "variant_id": "rule_v04",
+        "rule_count_proxy": 4,
+        "mean_toggle_rate": 0.6491228070175438,
+        "mean_num_bursts": 7.0,
+        "mean_mean_burst": 1.0,
+        "mean_max_burst": 1.0,
+        "mean_total_mutations": 7.0,
+        "mean_delta_volatility": 0.030041290874270706,
+        "mean_decision_entropy": 0.9287698496840654
+      },
+      {
+        "variant_id": "rule_v05",
+        "rule_count_proxy": 5,
+        "mean_toggle_rate": 0.3508771929824561,
+        "mean_num_bursts": 4.0,
+        "mean_mean_burst": 1.0,
+        "mean_max_burst": 1.0,
+        "mean_total_mutations": 4.0,
+        "mean_delta_volatility": 0.031543200180989724,
+        "mean_decision_entropy": 0.721928094884477
+      },
+      {
+        "variant_id": "rule_v06",
+        "rule_count_proxy": 6,
+        "mean_toggle_rate": 0.47368421052631576,
+        "mean_num_bursts": 5.0,
+        "mean_mean_burst": 1.9047619047619049,
+        "mean_max_burst": 4.0,
+        "mean_total_mutations": 9.333333333333334,
+        "mean_delta_volatility": 0.025228019386932324,
+        "mean_decision_entropy": 0.9709505944517834
+      },
+      {
+        "variant_id": "rule_v07",
+        "rule_count_proxy": 7,
+        "mean_toggle_rate": 0.6842105263157895,
+        "mean_num_bursts": 7.0,
+        "mean_mean_burst": 1.0,
+        "mean_max_burst": 1.0,
+        "mean_total_mutations": 7.0,
+        "mean_delta_volatility": 0.02485216070465784,
+        "mean_decision_entropy": 0.9287698496840654
+      },
+      {
+        "variant_id": "rule_v08",
+        "rule_count_proxy": 8,
+        "mean_toggle_rate": 0.3333333333333333,
+        "mean_num_bursts": 3.6666666666666665,
+        "mean_mean_burst": 1.0,
+        "mean_max_burst": 1.0,
+        "mean_total_mutations": 3.6666666666666665,
+        "mean_delta_volatility": 0.027440039800099642,
+        "mean_decision_entropy": 0.684565498160823
+      },
+      {
+        "variant_id": "rule_v09",
+        "rule_count_proxy": 9,
+        "mean_toggle_rate": 0.6140350877192983,
+        "mean_num_bursts": 6.333333333333333,
+        "mean_mean_burst": 1.7619047619047619,
+        "mean_max_burst": 3.0,
+        "mean_total_mutations": 11.0,
+        "mean_delta_volatility": 0.029116185987893173,
+        "mean_decision_entropy": 0.9782252142961632
+      }
+    ],
+    "variant_agg_preview_bottom10": [
+      {
+        "variant_id": "rule_v17",
+        "rule_count_proxy": 17,
+        "mean_toggle_rate": 0.42105263157894735,
+        "mean_num_bursts": 4.333333333333333,
+        "mean_mean_burst": 1.0,
+        "mean_max_burst": 1.0,
+        "mean_total_mutations": 4.333333333333333,
+        "mean_delta_volatility": 0.028227564927550654,
+        "mean_decision_entropy": 0.7441321845420034
+      },
+      {
+        "variant_id": "rule_v18",
+        "rule_count_proxy": 18,
+        "mean_toggle_rate": 0.43859649122807015,
+        "mean_num_bursts": 4.666666666666667,
+        "mean_mean_burst": 2.1999999999999997,
+        "mean_max_burst": 5.333333333333333,
+        "mean_total_mutations": 10.333333333333334,
+        "mean_delta_volatility": 0.027849531121135224,
+        "mean_decision_entropy": 0.9782252142961632
+      },
+      {
+        "variant_id": "rule_v19",
+        "rule_count_proxy": 19,
+        "mean_toggle_rate": 0.5964912280701754,
+        "mean_num_bursts": 6.0,
+        "mean_mean_burst": 1.0,
+        "mean_max_burst": 1.0,
+        "mean_total_mutations": 6.0,
+        "mean_delta_volatility": 0.026770046574839893,
+        "mean_decision_entropy": 0.8755456930188869
+      },
+      {
+        "variant_id": "rule_v20",
+        "rule_count_proxy": 20,
+        "mean_toggle_rate": 0.3859649122807018,
+        "mean_num_bursts": 4.0,
+        "mean_mean_burst": 1.0,
+        "mean_max_burst": 1.0,
+        "mean_total_mutations": 4.0,
+        "mean_delta_volatility": 0.025008371544790787,
+        "mean_decision_entropy": 0.7143488413514132
+      },
+      {
+        "variant_id": "rule_v21",
+        "rule_count_proxy": 21,
+        "mean_toggle_rate": 0.42105263157894735,
+        "mean_num_bursts": 4.666666666666667,
+        "mean_mean_burst": 2.0277777777777777,
+        "mean_max_burst": 4.666666666666667,
+        "mean_total_mutations": 9.333333333333334,
+        "mean_delta_volatility": 0.026142683365450243,
+        "mean_decision_entropy": 0.975614169784881
+      },
+      {
+        "variant_id": "rule_v22",
+        "rule_count_proxy": 22,
+        "mean_toggle_rate": 0.6491228070175438,
+        "mean_num_bursts": 6.666666666666667,
+        "mean_mean_burst": 1.0,
+        "mean_max_burst": 1.0,
+        "mean_total_mutations": 6.666666666666667,
+        "mean_delta_volatility": 0.028304862342161032,
+        "mean_decision_entropy": 0.9111774643024658
+      },
+      {
+        "variant_id": "rule_v23",
+        "rule_count_proxy": 23,
+        "mean_toggle_rate": 0.3859649122807018,
+        "mean_num_bursts": 4.0,
+        "mean_mean_burst": 1.0,
+        "mean_max_burst": 1.0,
+        "mean_total_mutations": 4.0,
+        "mean_delta_volatility": 0.028075505962258367,
+        "mean_decision_entropy": 0.7143488413514132
+      },
+      {
+        "variant_id": "rule_v24",
+        "rule_count_proxy": 24,
+        "mean_toggle_rate": 0.6140350877192983,
+        "mean_num_bursts": 6.333333333333333,
+        "mean_mean_burst": 1.837037037037037,
+        "mean_max_burst": 3.3333333333333335,
+        "mean_total_mutations": 10.666666666666666,
+        "mean_delta_volatility": 0.02867348888385106,
+        "mean_decision_entropy": 0.9903168648153375
+      },
+      {
+        "variant_id": "rule_v25",
+        "rule_count_proxy": 25,
+        "mean_toggle_rate": 0.7192982456140351,
+        "mean_num_bursts": 7.666666666666667,
+        "mean_mean_burst": 1.0,
+        "mean_max_burst": 1.0,
+        "mean_total_mutations": 7.666666666666667,
+        "mean_delta_volatility": 0.027492506371762076,
+        "mean_decision_entropy": 0.9586564147587241
+      },
+      {
+        "variant_id": "rule_v26",
+        "rule_count_proxy": 26,
+        "mean_toggle_rate": 0.43859649122807015,
+        "mean_num_bursts": 4.666666666666667,
+        "mean_mean_burst": 1.0,
+        "mean_max_burst": 1.0,
+        "mean_total_mutations": 4.666666666666667,
+        "mean_delta_volatility": 0.027491286561276,
+        "mean_decision_entropy": 0.7814947812656573
+      }
+    ]
+  }
+}
