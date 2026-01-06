@@ -1,0 +1,7 @@
+kind,rows,has_step,has_read_error,columns,read_error,antibody_key
+Prediction_Result,1,False,False,Name|ACSINS_transformed|AS|BVP|CIC_transformed|CSI_transformed|ELISA|HIC|HEK|PSR|SGAC_transformed|SMAC_transformed|Tm|antibody_key|__source_file__,,001
+DeepViscosity_classes,1,False,False,Name|Prob_Mean|Prob_Std|DeepViscosity_classes|antibody_key|__source_file__,,001
+Prediction_Result,1,False,False,Name|ACSINS_transformed|AS|BVP|CIC_transformed|CSI_transformed|ELISA|HIC|HEK|PSR|SGAC_transformed|SMAC_transformed|Tm|antibody_key|__source_file__,,045
+DeepViscosity_classes,1,False,False,Name|Prob_Mean|Prob_Std|DeepViscosity_classes|antibody_key|__source_file__,,045
+Prediction_Result,1,False,False,Name|ACSINS_transformed|AS|BVP|CIC_transformed|CSI_transformed|ELISA|HIC|HEK|PSR|SGAC_transformed|SMAC_transformed|Tm|antibody_key|__source_file__,,183
+DeepViscosity_classes,1,False,False,Name|Prob_Mean|Prob_Std|DeepViscosity_classes|antibody_key|__source_file__,,183
