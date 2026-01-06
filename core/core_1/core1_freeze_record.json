@@ -1,0 +1,28 @@
+{
+  "core": "Core 1",
+  "status": "FROZEN",
+  "frozen_at": "2026-01-05T20:20:34.319561",
+  "fixed_statements": [
+    "Developability 지표는 연속적이며 경계에서 흔들린다.",
+    "단기 예측은 부분적으로 가능하다.",
+    "이 조건에서도 설계 판단은 안정되지 않는다.",
+    "이후 모든 실험은 이 3개 항체를 기준으로 진행한다."
+  ],
+  "final_candidates": {
+    "A_boundary": {
+      "antibody_id": "GDPa1-001",
+      "antibody_name": "abagovomab",
+      "description": "경계 영역에서 developability 지표가 반복적으로 흔들리는 케이스"
+    },
+    "B_conflict": {
+      "antibody_id": "GDPa1-045",
+      "antibody_name": "cixutumumab",
+      "description": "지표 간 신호가 상충되어 설계 판단을 혼란스럽게 만드는 케이스"
+    },
+    "C_obvious_risk": {
+      "antibody_id": "GDPa1-183",
+      "antibody_name": "prolgolimab",
+      "description": "명백한 리스크 신호로 인해 개입이 강하게 유도되는 케이스"
+    }
+  }
+}

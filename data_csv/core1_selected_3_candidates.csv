@@ -1,0 +1,4 @@
+candidate_type,antibody_id,antibody_name,vh_length,vl_length,len_gap,hierarchical_cluster_IgG_isotype_stratified_fold,boundary_final,conflict_final,risk_final
+A_boundary,GDPa1-001,abagovomab,119,107,12,2,14.0,-10.0,-22.0
+B_conflict,GDPa1-045,cixutumumab,130,108,22,4,-11.5,64.0,78.0
+C_obvious_risk,GDPa1-183,prolgolimab,129,106,23,4,-10.5,54.0,89.5

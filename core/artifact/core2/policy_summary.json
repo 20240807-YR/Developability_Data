@@ -1,0 +1,36 @@
+{
+  "trigger_rule": "worsening_then_mutate",
+  "lookback_window": 1,
+  "cooldown": 0,
+  "mutation_strength": "small_fixed",
+  "policy_version": "core2_baseline_v1",
+  "instability_diagnostics": [
+    {
+      "antibody_key": "GDPa1-001",
+      "toggle_rate": 0.47368421052631576,
+      "num_bursts": 5,
+      "mean_burst_length": 1.8,
+      "max_burst_length": 3,
+      "unnecessary_intervention_count": 4,
+      "total_mutations": 9
+    },
+    {
+      "antibody_key": "GDPa1-045",
+      "toggle_rate": 0.3157894736842105,
+      "num_bursts": 4,
+      "mean_burst_length": 3.5,
+      "max_burst_length": 6,
+      "unnecessary_intervention_count": 10,
+      "total_mutations": 14
+    },
+    {
+      "antibody_key": "GDPa1-183",
+      "toggle_rate": 0.3684210526315789,
+      "num_bursts": 4,
+      "mean_burst_length": 1.5,
+      "max_burst_length": 3,
+      "unnecessary_intervention_count": 2,
+      "total_mutations": 6
+    }
+  ]
+}
