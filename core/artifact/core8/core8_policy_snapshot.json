@@ -1,0 +1,37 @@
+{
+  "policy_name": "Core8_Refusal_Oriented_Governance",
+  "created_at": 1767765226,
+  "stages": {
+    "0": "NORMAL",
+    "1": "RATE_LIMIT",
+    "2": "PARTIAL_SEAL",
+    "3": "REFUSAL"
+  },
+  "min_guard_conditions": {
+    "MIN_STEPS_BEFORE_FALLBACK": 8,
+    "MIN_ATTEMPTS_WINDOW": 5
+  },
+  "accumulative_thresholds": {
+    "WINDOW_SIZE": 10,
+    "BLOCKED_RATE_THRESHOLD_STAGE1": 0.25,
+    "VETO_STREAK_THRESHOLD": 2,
+    "BLOCKED_RATE_THRESHOLD_STAGE2": 0.4,
+    "OSCILLATION_THRESHOLD": 3,
+    "SOMS_CUMSUM_THRESHOLD": 12.0
+  },
+  "reason_codes": {
+    "REASON_BLOCKED_RATE_ACCUMULATION": "Blocked rate exceeded threshold",
+    "REASON_VETO_STREAK": "Consecutive veto detected",
+    "REASON_OSCILLATION_LOCK": "Oscillation lock detected",
+    "REASON_SOMS_CUMSUM": "Cumulative SoMS exceeded threshold",
+    "REASON_MIN_STEPS_NOT_REACHED": "Minimum guard steps not reached",
+    "REASON_STAGE_ESCALATION": "Policy stage escalated",
+    "REASON_REFUSAL_TERMINATION": "Design process terminated by policy"
+  },
+  "policy_principles": [
+    "No immediate fallback allowed",
+    "Fallback triggered only by accumulation",
+    "Stage escalation is irreversible",
+    "Refusal is a valid terminal outcome"
+  ]
+}
