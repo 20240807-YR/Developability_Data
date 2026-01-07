@@ -1,0 +1,18 @@
+{
+  "rule_id": "core8_06_v1",
+  "min_steps": 10,
+  "thresholds": {
+    "block_rate": 0.35,
+    "veto_streak": 6,
+    "toggle_rate": 0.45,
+    "soms_cumsum": 25.0,
+    "partial_seal": 0.2,
+    "fallback_score": 0.85
+  },
+  "weights": {
+    "block": 0.25,
+    "veto": 0.25,
+    "toggle": 0.25,
+    "soms": 0.25
+  }
+}

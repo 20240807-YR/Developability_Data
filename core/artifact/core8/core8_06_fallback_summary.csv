@@ -1,0 +1,7 @@
+run_id,case_id,has_hold,has_partial_seal,has_refusal,has_fallback,max_score,max_soms
+core7_04_1767776352,A_ALWAYS_ALLOW,True,False,False,False,"fallback_score    0.2415
+fallback_score    0.2415
+dtype: float64",24.15
+core7_04_1767776352,B_GOVERNED,True,True,False,False,"fallback_score    0.521271
+fallback_score    0.521271
+dtype: float64",24.199999999999996
