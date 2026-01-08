@@ -1,0 +1,72 @@
+{
+  "rule_id": "core10_05_cost_calibration_v1",
+  "pseudo_mode": "A",
+  "pseudo_label_contract": {
+    "mode_A": {
+      "label": "pseudo_failure_A",
+      "definition": "hazard_rule >= quantile(0.7)",
+      "threshold_value": 0.7329374671571203
+    },
+    "mode_B": {
+      "label": "pseudo_failure_B",
+      "definition": "composite_hazard >= quantile(0.7)",
+      "threshold_value": 0.9237876944869656
+    },
+    "active": {
+      "label_col": "pseudo_failure_A",
+      "threshold_value": 0.7329374671571203,
+      "pseudo_fail_quantile": 0.3,
+      "note": "Pseudo-failure is an operational surrogate inside fallback pool (not ground-truth failure)."
+    }
+  },
+  "cost_policy": {
+    "cost_fp": 1.0,
+    "cost_fn": 5.0,
+    "stability_weight": 0.25,
+    "stability_proxy": "mean(abs(diff(predicted_positive_rate))) across threshold sweep"
+  },
+  "recommended_thresholds": [
+    {
+      "hazard_col": "hazard_rule",
+      "threshold": 0.52,
+      "total_cost": 0.0475,
+      "base_cost": 0.0,
+      "stability_proxy": 0.01,
+      "confusion": {
+        "tp": 6,
+        "fp": 0,
+        "tn": 13,
+        "fn": 0
+      },
+      "pos_rate": 0.3157894736842105
+    },
+    {
+      "hazard_col": "hazard_logit",
+      "threshold": 0.91,
+      "total_cost": 1.0475,
+      "base_cost": 1.0,
+      "stability_proxy": 0.01,
+      "confusion": {
+        "tp": 6,
+        "fp": 1,
+        "tn": 12,
+        "fn": 0
+      },
+      "pos_rate": 0.3684210526315789
+    },
+    {
+      "hazard_col": "hazard_tree",
+      "threshold": 0.01,
+      "total_cost": 7.015,
+      "base_cost": 7.0,
+      "stability_proxy": 0.003157894736842105,
+      "confusion": {
+        "tp": 6,
+        "fp": 7,
+        "tn": 6,
+        "fn": 0
+      },
+      "pos_rate": 0.6842105263157895
+    }
+  ]
+}

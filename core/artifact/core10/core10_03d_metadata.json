@@ -1,0 +1,23 @@
+{
+  "core_id": "core10_03d",
+  "name": "Alternative Candidate Selection from Developability DB",
+  "purpose": "Construct a structurally diverse fallback candidate pool when only one post-shutdown operating antibody exists.",
+  "philosophy": "Core10 does not select a single optimal antibody. It constructs a fallback pool of structurally distinct candidates within the same operational risk tier.",
+  "decision_principles": {
+    "stage_1_gate": "proxy_survivability_score > REF_SCORE",
+    "stage_2_grouping": "hc_subtype | lc_subtype | cluster_id",
+    "stage_3_selection": [
+      "proxy_survivability_score (desc)",
+      "tie_break_risk (asc)",
+      "antibody_id (lexicographic)"
+    ]
+  },
+  "notes": [
+    "No learning model involved",
+    "Deterministic and explainable",
+    "Scores may tie; diversity is the goal",
+    "Failure-aware operational design"
+  ],
+  "pool_size": 19,
+  "generated_by": "core10_03d notebook"
+}
