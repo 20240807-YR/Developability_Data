@@ -1,0 +1,1 @@
+run_id,case_id,antibody_id,soft_score,max_step,mean_soms,reentry_rate,risk_penalty,final_rank_score,eligible,selection_status,ttl_steps,next_review_step,final_decision

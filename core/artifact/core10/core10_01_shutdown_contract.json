@@ -1,0 +1,42 @@
+{
+  "contract_id": "core10_01_shutdown_contract_v1",
+  "policy_statement": "Design ends, operation continues.",
+  "keys": [
+    "run_id",
+    "case_id",
+    "antibody_id",
+    "step"
+  ],
+  "trigger_priority": [
+    {
+      "trigger": "CORE8_REFUSAL",
+      "source": "core8_06_fallback_decisions.csv",
+      "condition": "fallback_stage == 'REFUSAL'"
+    },
+    {
+      "trigger": "CORE8_FALLBACK_ENTER",
+      "source": "core8_06_fallback_decisions.csv",
+      "condition": "fallback_stage == 'FALLBACK_ENTER'"
+    },
+    {
+      "trigger": "CORE9_RESERVATION_CONFIRMED",
+      "source": "core9_04_reservation_log.csv",
+      "condition": "reservation_status == 'CONFIRMED'"
+    },
+    {
+      "trigger": "CORE8_PARTIAL_SEAL",
+      "source": "core8_06_fallback_decisions.csv",
+      "condition": "fallback_stage == 'PARTIAL_SEAL'"
+    },
+    {
+      "trigger": "NONE",
+      "source": "derived",
+      "condition": "no trigger matched"
+    }
+  ],
+  "shutdown_step_rule": "For each (run_id, case_id, antibody_id), pick earliest step among triggers with highest priority.",
+  "notes": [
+    "This contract defines shutdown as an event, not a failure.",
+    "Post-shutdown operation is handled in Core10 allocation policy."
+  ]
+}

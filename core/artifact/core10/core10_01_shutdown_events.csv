@@ -1,0 +1,2 @@
+run_id,case_id,antibody_id,shutdown_step,shutdown_trigger_final,fallback_stage,fallback_reason_code,fallback_score,reservation_status,reservation_reason_code,risk_score_total
+core7_04_1767776352,B_GOVERNED,antibody_C,21.0,CORE8_PARTIAL_SEAL,PARTIAL_SEAL,REASON_PARTIAL_SEAL_THRESHOLD,0.4417089947089947,NONE,REASON_WITHIN_BOUNDS,0.2328544973544973

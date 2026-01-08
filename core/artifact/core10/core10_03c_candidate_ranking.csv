@@ -1,0 +1,2 @@
+run_id,case_id,antibody_id,soft_score,max_step,mean_soms,reentry_rate,risk_penalty,final_rank_score,eligible,selection_status,ttl_steps,next_review_step,final_decision
+core7_04_1767776352,B_GOVERNED,antibody_C,0.0,29,11.916666666666666,0.0,0.5,-0.5,False,REJECTED,0,29,NO_VALID_FALLBACK

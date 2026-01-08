@@ -1,0 +1,40 @@
+{
+  "contract_id": "core10_03_survivability_contract_v1",
+  "purpose": "Operational survivability target after design shutdown",
+  "policy_statement": "Design ends, operation continues.",
+  "keys": [
+    "run_id",
+    "case_id",
+    "antibody_id",
+    "step"
+  ],
+  "shutdown_scope": "Only steps >= shutdown_step are evaluated",
+  "horizons": [
+    10,
+    20
+  ],
+  "soms_worsening_rule": {
+    "metric": "SoMS_cumsum_window",
+    "delta_definition": "SoMS(t+H) - SoMS(t)",
+    "delta_max": 0.0,
+    "meaning": "No worsening beyond allowed delta"
+  },
+  "reentry_rule": {
+    "reentry_flag_definition": [
+      {
+        "source": "core8_06_fallback_decisions.csv",
+        "condition": "fallback_stage in ['FALLBACK_ENTER', 'REFUSAL']"
+      },
+      {
+        "source": "core9_04_reservation_log.csv",
+        "condition": "reservation_status in ['CONFIRMED']"
+      }
+    ],
+    "window": "(t, t+H]"
+  },
+  "label_definition": "y_survive_H = 1 iff (no SoMS worsening) AND (no re-entry) within horizon; else 0",
+  "notes": [
+    "This is a target contract, not a model.",
+    "Forecast outputs in later notebooks must not directly trigger immediate intervention."
+  ]
+}

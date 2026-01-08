@@ -1,0 +1,20 @@
+{
+  "contract_id": "core10_03b_survivability_min_window_v1",
+  "type": "operational_relaxation_metric",
+  "parent_contract": "core10_03_survivability_contract",
+  "definition": {
+    "metric": "y_survive_min_H",
+    "window": "H_eff = min(H, available_steps)",
+    "soms_rule": {
+      "metric": "SoMS_cumsum_window",
+      "rate_definition": "(SoMS(t+H_eff)-SoMS(t))/H_eff",
+      "rate_max": 0.5
+    },
+    "reentry_rule": "No re-entry within (t, t+H_eff]"
+  },
+  "notes": [
+    "This is NOT a contractual shutdown criterion.",
+    "Used for operational analysis when post-shutdown data is short.",
+    "Preserves Core10 contract integrity."
+  ]
+}
