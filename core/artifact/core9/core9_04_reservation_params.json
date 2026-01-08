@@ -1,0 +1,9 @@
+{
+  "reservation_rule_id": "core9_04_v1",
+  "min_steps": 10,
+  "horizon_H": 5,
+  "K_consecutive_high_for_candidate": 3,
+  "M_window_for_confirm": 5,
+  "TTL_steps_after_confirm": 10,
+  "hazard_high_level": "HIGH"
+}

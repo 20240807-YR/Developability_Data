@@ -1,0 +1,7 @@
+run_id,case_id,bucket,antibody_id,core9_first_confirmed_step,core8_first_stage_step,lead_time_steps,core8_first_partial_seal_step,core8_first_refusal_step,core8_first_fallback_enter_step
+core7_04_1767776352,A_ALWAYS_ALLOW,A_ALWAYS_ALLOW,antibody_A,,,,,,
+core7_04_1767776352,A_ALWAYS_ALLOW,A_ALWAYS_ALLOW,antibody_B,,,,,,
+core7_04_1767776352,A_ALWAYS_ALLOW,A_ALWAYS_ALLOW,antibody_C,,,,,,
+core7_04_1767776352,B_GOVERNED,B_GOVERNED,antibody_A,,,,,,
+core7_04_1767776352,B_GOVERNED,B_GOVERNED,antibody_B,,,,,,
+core7_04_1767776352,B_GOVERNED,B_GOVERNED,antibody_C,,21.0,,21.0,,

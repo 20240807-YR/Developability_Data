@@ -1,0 +1,38 @@
+{
+  "core": "core9",
+  "notebook": "core9_01_data_contract_and_targets",
+  "prediction_horizon": 5,
+  "features_allowed": [
+    "step",
+    "blocked_rate_window",
+    "veto_streak",
+    "action_toggle_rate",
+    "SoMS_cumsum_window",
+    "delta_soms",
+    "conflict_density_proxy"
+  ],
+  "features_forbidden": [
+    "fallback_stage",
+    "fallback_entered",
+    "refusal_triggered",
+    "reason_code"
+  ],
+  "targets": {
+    "y_soms_runaway": {
+      "definition": "SoMS exceeds threshold within H steps",
+      "threshold": 25.0
+    },
+    "y_osc_nonrecover": {
+      "definition": "action_toggle_rate stays above threshold for H consecutive steps",
+      "threshold": 0.45
+    },
+    "y_conflict_selfamp": {
+      "definition": "conflict_density_proxy stays above threshold and strictly increases",
+      "proxy_weights": {
+        "blocked": 0.4,
+        "toggle": 0.4,
+        "veto": 0.2
+      }
+    }
+  }
+}

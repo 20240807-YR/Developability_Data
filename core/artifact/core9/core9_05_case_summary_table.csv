@@ -1,0 +1,3 @@
+run_id,case_id,bucket,reservation_any_hold,reservation_any_candidate,reservation_any_confirmed,reservation_any_expired,core8_any_partial_seal,core8_any_refusal,core8_any_fallback_enter,max_risk_score_total,max_fallback_score,max_soms
+core7_04_1767776352,A_ALWAYS_ALLOW,A_ALWAYS_ALLOW,True,False,False,False,False,False,False,0.12075,0.2415,24.15
+core7_04_1767776352,B_GOVERNED,B_GOVERNED,True,False,False,False,True,False,False,0.4132411816578483,0.5212707231040565,24.199999999999996
