@@ -1,0 +1,127 @@
+{
+  "policy_id": "core10_06_allocation_policy_v1",
+  "policy_version_id": "core10_06_allocation_policy_v1:3c26436738ef",
+  "policy_hash": "3c26436738efbfc2179d2bb7d8c398923ac76411d202509274b5902e88e2001a",
+  "created_at": null,
+  "snapshot_ts": "2026-01-10T02:46:14.445947",
+  "policy_body": {
+    "policy_id": "core10_06_allocation_policy_v1",
+    "core": "core10",
+    "type": "allocation_policy_dsl",
+    "version": "v1",
+    "principles": {
+      "no_performance_optimization": true,
+      "deterministic": true,
+      "no_llm_decision": true,
+      "operation_continues_after_shutdown": true,
+      "future_design_option_preservation": true
+    },
+    "inputs": {
+      "scores_csv": "../artifact/core10/core10_04_survivability_scores.csv",
+      "trace_csv": "../artifact/core8/core8_03_refusal_state_trace_counterfactual.csv",
+      "reservation_log_csv": "../artifact/core9/core9_04_reservation_log.csv",
+      "fallback_decisions_csv": "../artifact/core8/core8_06_fallback_decisions.csv"
+    },
+    "eligibility": {
+      "cooldown": {
+        "enabled": true,
+        "cooldown_steps": 3,
+        "reason_code": "REASON_COOLDOWN_ACTIVE"
+      },
+      "refusal_exclusion": {
+        "enabled": true,
+        "exclude_if_fallback_stage_in": [
+          "REFUSAL",
+          "FALLBACK_ENTER"
+        ],
+        "reason_code": "REASON_DESIGN_SHUTDOWN_EXCLUSION"
+      },
+      "reservation_handling": {
+        "enabled": true,
+        "exclude_if_reservation_status_in": [
+          "CONFIRMED"
+        ],
+        "degrade_if_reservation_status_in": [
+          "CANDIDATE"
+        ],
+        "reason_code_exclude": "REASON_RESERVATION_CONFIRMED_EXCLUSION",
+        "reason_code_degrade": "REASON_RESERVATION_CANDIDATE_DEGRADE"
+      }
+    },
+    "metrics_spec": {
+      "window_k": 5,
+      "toggle_threshold": 0.45,
+      "metrics": {
+        "soms_slope_k": {
+          "input": "SoMS_cumsum_window",
+          "definition": "linear_slope over last k steps (per antibody trajectory)",
+          "k": 5,
+          "direction": "lower_better"
+        },
+        "toggle_over_th_streak_k": {
+          "input": "action_toggle_rate",
+          "definition": "consecutive streak length over last k steps where toggle_rate >= threshold",
+          "k": 5,
+          "threshold": 0.45,
+          "direction": "lower_better"
+        }
+      }
+    },
+    "ranking": [
+      {
+        "name": "survivability_primary",
+        "field": "proxy_survivability_score",
+        "order": "desc",
+        "reason_code": "RANK_SURVIVABILITY_MAX"
+      },
+      {
+        "name": "soms_slope_secondary",
+        "field": "soms_slope_k",
+        "order": "asc",
+        "reason_code": "RANK_SOMS_SLOPE_MIN"
+      },
+      {
+        "name": "toggle_streak_tertiary",
+        "field": "toggle_over_th_streak_k",
+        "order": "asc",
+        "reason_code": "RANK_TOGGLE_STREAK_MIN"
+      },
+      {
+        "name": "tie_break_risk_quaternary",
+        "field": "tie_break_risk",
+        "order": "asc",
+        "reason_code": "RANK_TIE_BREAK_RISK_MIN"
+      },
+      {
+        "name": "deterministic_last",
+        "field": "antibody_id",
+        "order": "asc",
+        "reason_code": "RANK_ID_DETERMINISTIC"
+      }
+    ],
+    "diversity": {
+      "enabled": true,
+      "signature_field": "signature",
+      "rule": "prefer distinct signature reps before taking multiple from same signature",
+      "max_per_signature": 1,
+      "reason_code": "RULE_FUTURE_DESIGN_OPTION_PRESERVATION"
+    },
+    "outputs": {
+      "artifact": "core10_06_allocation_policy.json",
+      "note": "This artifact is imported by core10_07 allocation executor."
+    },
+    "logging": {
+      "required_fields": [
+        "run_id",
+        "case_id",
+        "step",
+        "selected_antibody_id",
+        "eligibility_rejections",
+        "ranking_fields_snapshot",
+        "policy_id",
+        "decision_reason_codes"
+      ],
+      "note": "Allocation executor must log deterministic reasons at each step."
+    }
+  }
+}

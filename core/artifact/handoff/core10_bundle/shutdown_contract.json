@@ -1,0 +1,15 @@
+{
+  "contract_id": "core10_shutdown_v1",
+  "purpose": "Hard termination guard for governed allocation system",
+  "trigger_conditions": {
+    "manual_shutdown": true,
+    "redesign_request_exceeded": true,
+    "external_override": true
+  },
+  "guarantees": {
+    "no_optimization_after_shutdown": true,
+    "allocation_frozen": true,
+    "audit_log_persisted": true
+  },
+  "created_at": "2026-01-10T03:15:38.230473"
+}

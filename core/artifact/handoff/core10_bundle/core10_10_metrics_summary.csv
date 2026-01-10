@@ -1,0 +1,2 @@
+experiment_id,policy_key,scenario_key,redesign_request_time,soms_degradation_rate,redesign_request_frequency,n_steps,final_SoMS,total_switches
+core10_sim_001::B_GOVERNED,B_GOVERNED,B_GOVERNED,36,0.3641330196493166,0.4,60,21.903764010258527,3

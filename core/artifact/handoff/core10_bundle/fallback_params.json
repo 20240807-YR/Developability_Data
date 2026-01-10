@@ -1,0 +1,16 @@
+{
+  "policy": "signature_representative_fallback",
+  "selection_rule": {
+    "sort": [
+      "proxy_survivability_score desc",
+      "tie_break_risk asc",
+      "antibody_id asc"
+    ],
+    "per_signature_limit": 1
+  },
+  "safety_guarantee": {
+    "no_model_training": true,
+    "deterministic": true
+  },
+  "created_at": "2026-01-10T03:15:38.236690"
+}
