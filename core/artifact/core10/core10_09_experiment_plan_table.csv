@@ -1,0 +1,10 @@
+experiment_id,policy_key,policy_type,policy_description,scenario_key,scenario_config,seed,n_steps,ttl_steps,cooldown_steps
+EXP_000,BASELINE_RANDOM,random,Random allocation baseline,COLD,"{""drift_enabled"": false, ""drift_per_step"": 0.0, ""noise_scale"": 0.01, ""toggle_sensitivity"": 0.5}",1458256497,60,8,3
+EXP_001,BASELINE_RANDOM,random,Random allocation baseline,HOT,"{""drift_enabled"": true, ""drift_per_step"": 0.03, ""noise_scale"": 0.03, ""toggle_sensitivity"": 1.0}",2865804044,60,8,3
+EXP_002,BASELINE_RANDOM,random,Random allocation baseline,OSCILLATION,"{""drift_enabled"": true, ""drift_per_step"": 0.015, ""noise_scale"": 0.02, ""toggle_sensitivity"": 1.8}",1780719939,60,8,3
+EXP_003,BASELINE_SCORE,score_max,Score-based allocation (forbidden baseline),COLD,"{""drift_enabled"": false, ""drift_per_step"": 0.0, ""noise_scale"": 0.01, ""toggle_sensitivity"": 0.5}",3757395954,60,8,3
+EXP_004,BASELINE_SCORE,score_max,Score-based allocation (forbidden baseline),HOT,"{""drift_enabled"": true, ""drift_per_step"": 0.03, ""noise_scale"": 0.03, ""toggle_sensitivity"": 1.0}",4140186586,60,8,3
+EXP_005,BASELINE_SCORE,score_max,Score-based allocation (forbidden baseline),OSCILLATION,"{""drift_enabled"": true, ""drift_per_step"": 0.015, ""noise_scale"": 0.02, ""toggle_sensitivity"": 1.8}",4153684021,60,8,3
+EXP_006,PROPOSED_STATEFUL,stateful,Core10 state/trajectory-aware policy,COLD,"{""drift_enabled"": false, ""drift_per_step"": 0.0, ""noise_scale"": 0.01, ""toggle_sensitivity"": 0.5}",2866911993,60,8,3
+EXP_007,PROPOSED_STATEFUL,stateful,Core10 state/trajectory-aware policy,HOT,"{""drift_enabled"": true, ""drift_per_step"": 0.03, ""noise_scale"": 0.03, ""toggle_sensitivity"": 1.0}",2411503323,60,8,3
+EXP_008,PROPOSED_STATEFUL,stateful,Core10 state/trajectory-aware policy,OSCILLATION,"{""drift_enabled"": true, ""drift_per_step"": 0.015, ""noise_scale"": 0.02, ""toggle_sensitivity"": 1.8}",899820554,60,8,3

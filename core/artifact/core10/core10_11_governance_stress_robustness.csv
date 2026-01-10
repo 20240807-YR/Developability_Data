@@ -1,0 +1,6 @@
+stress_key,pass,fail_reason,redesign_request_time,soms_degradation_rate,redesign_request_frequency
+SoMS_noise_low,False,toggle_no_recovery,46,0.3651735851409948,1
+SoMS_noise_high,False,toggle_no_recovery,46,0.3648497198119143,1
+sensor_drop_20pct,False,toggle_no_recovery,47,0.3581520377700859,1
+sensor_drop_40pct,False,toggle_no_recovery,48,0.3566079160346862,1
+toggle_spike,False,toggle_no_recovery,47,0.3641330196493166,1
