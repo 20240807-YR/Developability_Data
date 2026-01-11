@@ -1,0 +1,40 @@
+{
+  "n_candidates_all": 3,
+  "n_candidates_ok": 0,
+  "top10_all": [
+    {
+      "SoD_n": 0.0,
+      "SoMS_n": 0.0,
+      "antibody_key": "183",
+      "fallback_score": 0.0,
+      "fallback_score_n": 0.0,
+      "governance_signal": "CRITICAL",
+      "operational_risk": 0.0,
+      "pred_variance_n": 0.0,
+      "proxy_survivability": 1.0
+    },
+    {
+      "SoD_n": 0.0,
+      "SoMS_n": 0.0,
+      "antibody_key": "45",
+      "fallback_score": 0.0,
+      "fallback_score_n": 0.0,
+      "governance_signal": "CRITICAL",
+      "operational_risk": 0.0,
+      "pred_variance_n": 0.0,
+      "proxy_survivability": 1.0
+    },
+    {
+      "SoD_n": 1.0,
+      "SoMS_n": 1.0,
+      "antibody_key": "1",
+      "fallback_score": 1.0,
+      "fallback_score_n": 1.0,
+      "governance_signal": "CRITICAL",
+      "operational_risk": 1.0,
+      "pred_variance_n": 1.0,
+      "proxy_survivability": 0.0
+    }
+  ],
+  "top10_ok": []
+}

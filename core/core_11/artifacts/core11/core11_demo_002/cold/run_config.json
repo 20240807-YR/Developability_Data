@@ -1,0 +1,7 @@
+{
+  "run_id": "core11_demo_002",
+  "policy_key": "STATE_BASED",
+  "scenario_key": "cold",
+  "seed": 42,
+  "t_steps": 60
+}
