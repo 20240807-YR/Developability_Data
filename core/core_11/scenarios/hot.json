@@ -1,6 +1,6 @@
 {
   "T_STEPS": 50,
-  "hazard_threshold": 0.45,
+  "hazard_threshold": 0.09325,
   "drift_per_step": 0.03,
 
   "candidate_pool": ["A", "B", "C"],

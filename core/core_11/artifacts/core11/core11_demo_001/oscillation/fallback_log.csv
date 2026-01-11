@@ -1,0 +1,3 @@
+step,trigger,previous_allocation,fallback_allocation
+0,HAZARD_THRESHOLD_EXCEEDED,A,B
+1,HAZARD_THRESHOLD_EXCEEDED,B,C

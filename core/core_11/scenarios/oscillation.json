@@ -1,14 +1,22 @@
 {
   "T_STEPS": 60,
-  "hazard_threshold": 0.55,
-  "drift_per_step": 0.02,
+  "hazard_threshold": 0.0165,
+  "drift_per_step": 0.05,
 
-  "candidate_pool": ["A", "B", "C", "D"],
+  "candidate_pool": ["A", "B", "C"],
 
   "candidates": {
-    "A": { "proxy_survivability": 0.78, "operational_risk": 0.30 },
-    "B": { "proxy_survivability": 0.62, "operational_risk": 0.48 },
-    "C": { "proxy_survivability": 0.58, "operational_risk": 0.52 },
-    "D": { "proxy_survivability": 0.50, "operational_risk": 0.60 }
+    "A": {
+      "proxy_survivability": 0.40,
+      "operational_risk": 0.80
+    },
+    "B": {
+      "proxy_survivability": 0.60,
+      "operational_risk": 0.50
+    },
+    "C": {
+      "proxy_survivability": 0.90,
+      "operational_risk": 0.20
+    }
   }
 }
