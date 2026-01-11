@@ -4,7 +4,11 @@ from __future__ import annotations
 from pathlib import Path
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone
+from typing import Dict, List, Optional, Tuple
+from types import SimpleNamespace
+
+import pandas as pd
 
 # ==============================
 # Engine imports
@@ -14,7 +18,7 @@ from core.core_11.engine.state_machine import init_state
 from core.core_11.engine.dynamics import update_dynamics
 from core.core_11.engine.policy_engine import hazard_from_score, should_request_switch
 from core.core_11.engine.scheduler import decide_allocation
-from core.core_11.engine.fallback_engine import check_fallback, build_fallback_event
+from core.core_11.engine.fallback_engine import check_fallback
 from core.core_11.engine.logger import LoggerBundle
 from core.core_11.engine.replay import compute_checksum, save_checksum
 
@@ -31,12 +35,7 @@ def load_scenario(scenario_dir: Path, scenario_key: str) -> dict:
     if not txt:
         raise ValueError(f"Scenario file is EMPTY: {path.resolve()}")
 
-    try:
-        return json.loads(txt)
-    except json.JSONDecodeError as e:
-        raise ValueError(
-            f"Scenario JSON parse failed:\n{path.resolve()}\n{e}"
-        ) from e
+    return json.loads(txt)
 
 
 def dump_json(path: Path, obj: dict, *, sort_keys: bool = True) -> None:
@@ -45,191 +44,182 @@ def dump_json(path: Path, obj: dict, *, sort_keys: bool = True) -> None:
         json.dump(obj, f, indent=2, ensure_ascii=False, sort_keys=sort_keys)
 
 
+def norm01_series(s: pd.Series) -> pd.Series:
+    s = pd.to_numeric(s, errors="coerce").fillna(0.0)
+    mn, mx = float(s.min()), float(s.max())
+    den = (mx - mn) if (mx - mn) > 1e-12 else 1.0
+    return (s - mn) / den
+
+
+def load_core6_candidates(core6_csv: Path) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    df = pd.read_csv(core6_csv)
+
+    df["pred_variance_n"] = norm01_series(df["pred_variance"])
+    df["SoD_n"] = norm01_series(df["SoD"])
+    df["SoMS_n"] = norm01_series(df["SoMS"])
+
+    df["fallback_score"] = (
+        0.5 * df["pred_variance_n"]
+        + 0.3 * df["SoD_n"]
+        + 0.2 * df["SoMS_n"]
+    )
+
+    agg = (
+        df.groupby(["antibody_key", "governance_signal"], as_index=False)
+        .agg(fallback_score=("fallback_score", "min"))
+    )
+
+    agg["fallback_score_n"] = norm01_series(agg["fallback_score"])
+    agg["proxy_survivability"] = (1.0 - agg["fallback_score_n"]).clip(0, 1)
+    agg["operational_risk"] = agg["fallback_score_n"].clip(0, 1)
+
+    core6_all = agg.sort_values("fallback_score_n").reset_index(drop=True)
+    core6_ok = core6_all[core6_all["governance_signal"] != "CRITICAL"].reset_index(drop=True)
+    return core6_ok, core6_all
+
+
+def pick_core6_fallback(
+    core6_ok: pd.DataFrame,
+    core6_all: pd.DataFrame,
+    used: set,
+    top_k: int,
+    allow_use_critical: bool,
+):
+    def _pick(df):
+        avail = df[~df["antibody_key"].isin(used)]
+        if avail.empty:
+            avail = df
+        if avail.empty:
+            return None, [], None
+        ranked = avail.head(top_k)
+        return (
+            ranked.iloc[0]["antibody_key"],
+            ranked.iloc[1:]["antibody_key"].tolist(),
+            float(ranked.iloc[0]["fallback_score_n"]),
+        )
+
+    sel, alts, score = _pick(core6_ok)
+    if sel:
+        return sel, alts, score, "CORE6_NONCRITICAL"
+
+    if allow_use_critical:
+        sel, alts, score = _pick(core6_all)
+        if sel:
+            return sel, alts, score, "CORE6_WITH_CRITICAL"
+
+    return None, [], None, "NO_CANDIDATE"
+
+
+def ensure_fallback_log_header(run_dir: Path):
+    path = run_dir / "fallback_log.csv"
+    if not path.exists() or path.stat().st_size == 0:
+        path.write_text(
+            "step,trigger,previous_allocation,fallback_allocation,alternatives,"
+            "fallback_score_n,selection_source,reason,policy_fallback_target\n"
+        )
+
+
 # =========================================================
 # Main
 # =========================================================
 def main():
-    # -----------------------------------------------------
-    # Paths
-    # -----------------------------------------------------
     PROJECT_ROOT = Path(__file__).resolve().parents[3]
     CORE11_DIR = PROJECT_ROOT / "core" / "core_11"
     ART_ROOT = CORE11_DIR / "artifacts" / "core11"
     SCENARIO_DIR = CORE11_DIR / "scenarios"
+    CORE6_CSV = PROJECT_ROOT / "core" / "artifact" / "core6" / "core6_state_trace.csv"
 
-    ART_ROOT.mkdir(parents=True, exist_ok=True)
+    SCENARIO_KEY = os.environ["CORE11_SCENARIO"]
+    RUN_ID = os.environ["CORE11_RUN_ID"]
 
-    # -----------------------------------------------------
-    # Scenario
-    # -----------------------------------------------------
-    SCENARIO_KEY = os.environ.get("CORE11_SCENARIO", "cold")
-    scenario = load_scenario(SCENARIO_DIR, SCENARIO_KEY)
-
-    # -----------------------------------------------------
-    # Run ID (run_matrix에서 반드시 주입)
-    # -----------------------------------------------------
-    RUN_ID = os.environ.get("CORE11_RUN_ID")
-    if not RUN_ID:
-        raise RuntimeError(
-            "CORE11_RUN_ID is not set.\n"
-            "→ run_core11.py는 run_matrix.py를 통해 실행해야 함."
-        )
-
-    # -----------------------------------------------------
-    # Output directory
-    # -----------------------------------------------------
     RUN_DIR = ART_ROOT / RUN_ID / SCENARIO_KEY
     RUN_DIR.mkdir(parents=True, exist_ok=True)
 
-    print("\n🚀 Core11 start")
-    print("  run_id   :", RUN_ID)
-    print("  scenario :", SCENARIO_KEY)
-    print("  out_dir  :", RUN_DIR.resolve())
-    print("")
+    scenario = load_scenario(SCENARIO_DIR, SCENARIO_KEY)
 
-    # -----------------------------------------------------
-    # Snapshots
-    # -----------------------------------------------------
     dump_json(RUN_DIR / "scenario.json", scenario)
-
-    dump_json(
-        RUN_DIR / "policy_snapshot.json",
-        scenario.get("policy_snapshot", {}),
-    )
-
     dump_json(
         RUN_DIR / "run_meta.json",
         {
             "run_id": RUN_ID,
-            "scenario_key": SCENARIO_KEY,
-            "created_at_utc": datetime.utcnow().isoformat(),
-            "project_root": str(PROJECT_ROOT),
+            "scenario": SCENARIO_KEY,
+            "created_at_utc": datetime.now(timezone.utc).isoformat(),
         },
     )
 
-    # -----------------------------------------------------
-    # Scenario contract validation
-    # -----------------------------------------------------
-    required_keys = [
-        "T_STEPS",
-        "candidate_pool",
-        "candidates",
-        "hazard_threshold",
-        "drift_per_step",
-    ]
-    missing = [k for k in required_keys if k not in scenario]
-    if missing:
-        raise KeyError(
-            f"Scenario '{SCENARIO_KEY}' missing keys: {missing}"
-        )
-
-    # -----------------------------------------------------
-    # Bootstrap config
-    # -----------------------------------------------------
     cfg = load_run_config(
         run_id=RUN_ID,
-        policy_key=scenario.get("policy_key", "STATE_BASED"),
+        policy_key="STATE_BASED",
         scenario_key=SCENARIO_KEY,
-        seed=int(os.environ.get("CORE11_SEED", 42)),
+        seed=42,
         t_steps=int(scenario["T_STEPS"]),
         out_dir=RUN_DIR,
     )
 
-    try:
-        dump_json(RUN_DIR / "run_config_snapshot.json", cfg.__dict__)
-    except Exception:
-        if isinstance(cfg, dict):
-            dump_json(RUN_DIR / "run_config_snapshot.json", cfg)
+    core6_ok, core6_all = load_core6_candidates(CORE6_CSV)
+    core6_map = {
+        r["antibody_key"]: r
+        for _, r in core6_all.iterrows()
+    }
 
-    # -----------------------------------------------------
-    # Init
-    # -----------------------------------------------------
-    fallback_pool = list(scenario["candidate_pool"])
-    if not fallback_pool:
-        raise ValueError("scenario['candidate_pool'] is empty")
-
-    state = init_state(fallback_pool[0])
+    state = init_state(scenario["candidate_pool"][0])
     logger = LoggerBundle(RUN_DIR)
 
+    used_core6 = set()
     hazard_threshold = float(scenario["hazard_threshold"])
+    drift_step = float(scenario["drift_per_step"])
+    TOP_K = 3
 
-    # -----------------------------------------------------
-    # Main loop
-    # -----------------------------------------------------
     for step in range(int(cfg.t_steps)):
-        current_id = state.current_allocation
-        candidate_info = scenario["candidates"][current_id]
+        cur = state.current_allocation
 
-        proxy_surv = float(candidate_info["proxy_survivability"])
-        hazard = hazard_from_score(proxy_surv)
+        if cur in scenario["candidates"]:
+            info = scenario["candidates"][cur]
+            proxy, risk = info["proxy_survivability"], info["operational_risk"]
+        else:
+            info = core6_map[cur]
+            proxy, risk = info["proxy_survivability"], info["operational_risk"]
 
+        hazard = hazard_from_score(proxy)
         want_switch = should_request_switch(hazard, hazard_threshold)
 
-        decision = decide_allocation(
-            step=step,
-            current=current_id,
-            candidate=current_id,
-            allow_switch=want_switch,
-        )
+        decision = decide_allocation(step, cur, cur, want_switch)
+        policy_fb = check_fallback(state, hazard, scenario["candidate_pool"], hazard_threshold)
 
-        fallback_target = check_fallback(
-            state=state,
-            hazard=hazard,
-            fallback_pool=fallback_pool,
-            threshold=hazard_threshold,
-        )
-
-        fallback_triggered = False
-        if fallback_target and fallback_target != current_id:
-            logger.log_fallback(
-                build_fallback_event(step, current_id, fallback_target)
+        if policy_fb:
+            sel, alts, score, src = pick_core6_fallback(
+                core6_ok, core6_all, used_core6, TOP_K, True
             )
-            decision.allocation_id = fallback_target
-            decision.switched = True
-            decision.reason = "FALLBACK_TRIGGERED"
-            fallback_triggered = True
 
-        # apply decision
+            logger.log_fallback(SimpleNamespace(**{
+                "step": step,
+                "trigger": "HAZARD_THRESHOLD_EXCEEDED",
+                "previous_allocation": cur,
+                "fallback_allocation": sel,
+                "alternatives": json.dumps(alts),
+                "fallback_score_n": score,
+                "selection_source": src,
+                "reason": "FALLBACK_CORE6_SELECTED" if sel else "NO_CANDIDATE",
+                "policy_fallback_target": str(policy_fb),
+            }))
+
+            if sel:
+                used_core6.add(sel)
+                decision.allocation_id = sel
+                decision.switched = True
+                decision.reason = "FALLBACK_CORE6_SELECTED"
+
         state.current_allocation = decision.allocation_id
+        state = update_dynamics(state, hazard, risk, drift_step)
 
-        # dynamics update
-        state = update_dynamics(
-            state,
-            hazard,
-            float(candidate_info["operational_risk"]),
-            float(scenario["drift_per_step"]),
-        )
-
-        # logging
         logger.log_decision(decision)
         logger.log_state(state)
-        logger.log_audit(
-            {
-                "step": step,
-                "proxy_survivability": proxy_surv,
-                "hazard": hazard,
-                "hazard_threshold": hazard_threshold,
-                "want_switch": bool(want_switch),
-                "fallback_evaluated": True,
-                "fallback_triggered": fallback_triggered,
-                "allocation": state.current_allocation,
-            }
-        )
 
-    # -----------------------------------------------------
-    # Finalize
-    # -----------------------------------------------------
     logger.flush()
+    ensure_fallback_log_header(RUN_DIR)
 
     checksum = compute_checksum(RUN_DIR)
-    save_checksum(cfg.run_id, checksum, RUN_DIR)
-
-    print("✅ Core11 run completed")
-    print("run_id   :", RUN_ID)
-    print("scenario :", SCENARIO_KEY)
-    print("checksum :", checksum)
-    print("logs in  :", RUN_DIR.resolve())
-    print("")
+    save_checksum(RUN_ID, checksum, RUN_DIR)
 
 
 if __name__ == "__main__":
