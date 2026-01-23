@@ -1,0 +1,7 @@
+{
+  "run_id": "core11_\ub370\ubaa83001",
+  "policy_key": "STATE_BASED",
+  "scenario_key": "oscillation",
+  "seed": 42,
+  "t_steps": 60
+}

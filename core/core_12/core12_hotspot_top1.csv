@@ -1,0 +1,4 @@
+Antibody,Chain,CDR,CDR_length,Aromatic_load,Charge_pH7,Hotspot_score
+Antibody_A,VH,CDR3,17,6.0,2.96,8.96
+Antibody_C,VH,CDR3,14,3.0,-1.2,4.2
+Antibody_B,VH,CDR3,10,2.0,-1.2,3.2

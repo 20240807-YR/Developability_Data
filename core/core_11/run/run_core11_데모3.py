@@ -50,6 +50,8 @@ def norm01(s: pd.Series) -> pd.Series:
 
 def load_core6_candidates(core6_csv: Path) -> Tuple[pd.DataFrame, pd.DataFrame]:
     df = pd.read_csv(core6_csv)
+    df["antibody_key"] = df["antibody_key"].astype(str)
+    df["governance_signal"] = df["governance_signal"].astype(str)
 
     df["pred_variance_n"] = norm01(df["pred_variance"])
     df["SoD_n"] = norm01(df["SoD"])
@@ -113,6 +115,11 @@ def ensure_csv_header(path: Path, header: List[str]) -> None:
         path.write_text(",".join(header) + "\n", encoding="utf-8")
 
 
+def normalize_ab_id(x: str) -> str:
+    s = str(x)
+    return s.zfill(3) if s.isdigit() else s
+
+
 # =========================================================
 # Main
 # =========================================================
@@ -153,7 +160,7 @@ def main():
 
     core6_ok, core6_all = load_core6_candidates(CORE6_CSV)
     core6_map = {
-        r["antibody_key"]: r
+        normalize_ab_id(r["antibody_key"]): r
         for _, r in core6_all.iterrows()
     }
 
@@ -168,7 +175,7 @@ def main():
     ALLOW_USE_CRITICAL = os.environ.get("CORE11_ALLOW_CRITICAL", "1") == "1"
 
     for step in range(int(cfg.t_steps)):
-        cur = str(state.current_allocation)
+        cur = normalize_ab_id(state.current_allocation)
 
         if cur in scenario["candidates"]:
             info = scenario["candidates"][cur]
@@ -203,7 +210,7 @@ def main():
 
             if sel:
                 used_core6.add(sel)
-                decision.allocation_id = sel
+                decision.allocation_id = normalize_ab_id(sel)
                 decision.switched = True
                 decision.reason = "FALLBACK_CORE6_SELECTED"
                 fallback_triggered = True

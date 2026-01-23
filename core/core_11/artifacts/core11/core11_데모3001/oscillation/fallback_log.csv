@@ -1,0 +1,2 @@
+step,trigger,previous_allocation,fallback_allocation,alternatives,fallback_score_n,selection_source,reason,policy_fallback_target
+0,HAZARD_THRESHOLD_EXCEEDED,A,183,"[""45"", ""1""]",0.0,CORE6_WITH_CRITICAL,FALLBACK_CORE6_SELECTED,B
