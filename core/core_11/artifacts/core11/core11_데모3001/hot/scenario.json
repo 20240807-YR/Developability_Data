@@ -1,0 +1,24 @@
+{
+  "T_STEPS": 50,
+  "hazard_threshold": 0.09325,
+  "drift_per_step": 0.03,
+  "candidate_pool": [
+    "A",
+    "B",
+    "C"
+  ],
+  "candidates": {
+    "A": {
+      "proxy_survivability": 0.75,
+      "operational_risk": 0.35
+    },
+    "B": {
+      "proxy_survivability": 0.6,
+      "operational_risk": 0.55
+    },
+    "C": {
+      "proxy_survivability": 0.4,
+      "operational_risk": 0.75
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
   "core6_csv": "/Users/mac/Desktop/De/Developability_Data/core/artifact/core6/core6_state_trace.csv",
-  "created_at_utc": "2026-01-11T17:24:32.515185+00:00",
+  "created_at_utc": "2026-01-23T05:53:10.726086+00:00",
   "project_root": "/Users/mac/Desktop/De/Developability_Data",
-  "run_id": "core11_demo_002",
-  "scenario": "cold"
+  "run_id": "core11_데모2001",
+  "scenario": "hot"
 }

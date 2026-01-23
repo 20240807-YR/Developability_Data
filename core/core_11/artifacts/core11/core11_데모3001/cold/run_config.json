@@ -1,6 +1,6 @@
 {
+  "run_id": "core11_\ub370\ubaa83001",
   "policy_key": "STATE_BASED",
-  "run_id": "core11_demo_002",
   "scenario_key": "cold",
   "seed": 42,
   "t_steps": 60

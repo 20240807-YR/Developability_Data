@@ -1,0 +1,7 @@
+{
+  "policy_key": "STATE_BASED",
+  "run_id": "core11_데모2001",
+  "scenario_key": "hot",
+  "seed": 42,
+  "t_steps": 50
+}

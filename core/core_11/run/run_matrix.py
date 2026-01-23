@@ -4,13 +4,15 @@ import sys
 import os
 import re
 
-# ------------------------
-# Config
-# ------------------------
+# DEMO selection:
+#   CORE11_DEMO_TAG=run_core11        -> Demo1 / Demo3 style (scenario-split)
+#   CORE11_DEMO_TAG=run_core11_demo2  -> Demo2 runner with identical directory layout
+
 SCENARIOS = ["cold", "hot", "oscillation"]
 
 PYTHON = sys.executable
-RUN_MODULE = "core.core_11.run.run_core11"
+DEMO_TAG = os.environ.get("CORE11_DEMO_TAG", "run_core11_데모3")
+RUN_MODULE = f"core.core_11.run.{DEMO_TAG}"
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 ART_ROOT = PROJECT_ROOT / "core" / "core_11" / "artifacts" / "core11"
@@ -19,7 +21,7 @@ ART_ROOT = PROJECT_ROOT / "core" / "core_11" / "artifacts" / "core11"
 # ------------------------
 # Utilities
 # ------------------------
-def next_run_id(prefix="core11_demo_"):
+def next_run_id(prefix="core11_데모3"):
     ART_ROOT.mkdir(parents=True, exist_ok=True)
     max_idx = 0
     for p in ART_ROOT.iterdir():
