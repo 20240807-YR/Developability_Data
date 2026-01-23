@@ -1,0 +1,16 @@
+Antibody,CDR,orig_hotspot_score,proposal,expected_hotspot_score,delta_score,reason
+Antibody_A,CDR3,8.96,F/W/Y -> S/T (aromatic->polar),7.960000000000001,-1.0,reduce non-specific hydrophobic interactions
+Antibody_A,CDR3,8.96,K/R -> Q/N (reduce excessive positive charge),7.960000000000001,-1.0,lower charge driven non-specific binding
+Antibody_A,CDR3,8.96,Introduce small polar at midpoint,7.960000000000001,-1.0,increase solubility/colloidal stability
+4lvh,CDR1,5.24,F/W/Y -> S/T (aromatic->polar),4.24,-1.0,reduce non-specific hydrophobic interactions
+4lvh,CDR1,5.24,K/R -> Q/N (reduce excessive positive charge),4.24,-1.0,lower charge driven non-specific binding
+4lvh,CDR1,5.24,Introduce small polar at midpoint,4.24,-1.0,increase solubility/colloidal stability
+Antibody_C,CDR3,4.2,F/W/Y -> S/T (aromatic->polar),3.2,-1.0,reduce non-specific hydrophobic interactions
+Antibody_C,CDR3,4.2,K/R -> Q/N (reduce excessive positive charge),3.2,-1.0,lower charge driven non-specific binding
+Antibody_C,CDR3,4.2,Introduce small polar at midpoint,3.2,-1.0,increase solubility/colloidal stability
+Antibody_B,CDR3,3.2,F/W/Y -> S/T (aromatic->polar),2.2,-1.0,reduce non-specific hydrophobic interactions
+Antibody_B,CDR3,3.2,K/R -> Q/N (reduce excessive positive charge),2.2,-1.0,lower charge driven non-specific binding
+Antibody_B,CDR3,3.2,Introduce small polar at midpoint,2.2,-1.0,increase solubility/colloidal stability
+1bvl,CDR2,2.24,F/W/Y -> S/T (aromatic->polar),1.2400000000000002,-1.0,reduce non-specific hydrophobic interactions
+1bvl,CDR2,2.24,K/R -> Q/N (reduce excessive positive charge),1.2400000000000002,-1.0,lower charge driven non-specific binding
+1bvl,CDR2,2.24,Introduce small polar at midpoint,1.2400000000000002,-1.0,increase solubility/colloidal stability

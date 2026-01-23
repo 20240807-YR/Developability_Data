@@ -1,0 +1,6 @@
+Antibody,Chain,CDR,CDR_length,Aromatic_load,Charge_pH7,Hotspot_score,toggle_count,decision_reason,explain_reason,governance_class,governance_summary
+Antibody_A,VH,CDR3,17,6,2.96,8.96,0.0,,,WATCH,Antibody_A는 hotspot score 8.96와 toggle 0회를 보여 WATCH로 분류됨. 원인: nan
+4lvh,B,CDR1,8,3,-2.24,5.24,,,,WATCH,4lvh는 hotspot score 5.24와 toggle 0회를 보여 WATCH로 분류됨. 원인: nan
+Antibody_C,VH,CDR3,14,3,-1.2,4.2,,,,SAFE,Antibody_C는 hotspot score 4.2와 toggle 0회를 보여 SAFE로 분류됨. 원인: nan
+Antibody_B,VH,CDR3,10,2,-1.2,3.2,,,,SAFE,Antibody_B는 hotspot score 3.2와 toggle 0회를 보여 SAFE로 분류됨. 원인: nan
+1bvl,A,CDR2,7,1,-1.24,2.24,,,,SAFE,1bvl는 hotspot score 2.24와 toggle 0회를 보여 SAFE로 분류됨. 원인: nan

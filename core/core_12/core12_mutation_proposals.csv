@@ -1,0 +1,7 @@
+Antibody,Chain,CDR,WT,Mutation,Rationale
+Antibody_A,VH,CDR3,Y,Y->F,reduce aromatic stacking
+Antibody_A,VH,CDR3,W,W->F,reduce hydrophobic aggregation
+Antibody_A,VH,CDR3,F,F->Y,tune polarity
+Antibody_C,VH,CDR3,Y,Y->F,reduce aromatic stacking
+Antibody_C,VH,CDR3,W,W->F,reduce hydrophobic aggregation
+Antibody_C,VH,CDR3,F,F->Y,tune polarity

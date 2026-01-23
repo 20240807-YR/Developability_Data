@@ -1,0 +1,7 @@
+Antibody,CDR,Mutation,Charge_before,Charge_after,Hotspot_before,Hotspot_after,Delta_score
+Antibody_A,CDR3,Y->F,2.96,2.96,8.96,8.96,0.0
+Antibody_A,CDR3,W->F,2.96,2.96,8.96,8.96,0.0
+Antibody_A,CDR3,F->Y,2.96,2.96,8.96,8.96,0.0
+Antibody_C,CDR3,Y->F,-1.2,-1.2,4.2,4.2,0.0
+Antibody_C,CDR3,W->F,-1.2,-1.2,4.2,4.2,0.0
+Antibody_C,CDR3,F->Y,-1.2,-1.2,4.2,4.2,0.0

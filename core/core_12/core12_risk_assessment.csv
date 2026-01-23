@@ -1,0 +1,5 @@
+Section,Statement
+Design Limitation,본 분석은 서열 기반 developability 개선 방향을 예측하는 수준이며 실제 binding/affinity는 실험 검증이 필요함
+Structural Risk,CDR-H3와 같은 고변이 루프는 구조 의존성이 높아 서열 지표만으로 정확한 구조 안정성 예측이 어려움
+Metric Limitation,Hotspot_score 및 charge 변화는 근사 지표이며 절대적 정량 값이 아님
+Next Validation,실험 validation 또는 딥러닝 기반 구조-서열 모델을 통한 추가 정량 평가가 필요함

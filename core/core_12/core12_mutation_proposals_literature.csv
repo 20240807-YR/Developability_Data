@@ -1,0 +1,7 @@
+Antibody,Chain,CDR,WT,Mutation,Rationale,Literature_support
+Antibody_A,VH,CDR3,Y,Y->F,reduce aromatic stacking,"Excess aromatic residues in CDRs are associated with self-association and aggregation (Jain et al., PNAS 2017)."
+Antibody_A,VH,CDR3,W,W->F,reduce hydrophobic aggregation,"Hydrophobic patches in CDR-H3 correlate with poor solubility (Raybould et al., mAbs 2019)."
+Antibody_A,VH,CDR3,F,F->Y,tune polarity,
+Antibody_C,VH,CDR3,Y,Y->F,reduce aromatic stacking,"Excess aromatic residues in CDRs are associated with self-association and aggregation (Jain et al., PNAS 2017)."
+Antibody_C,VH,CDR3,W,W->F,reduce hydrophobic aggregation,"Hydrophobic patches in CDR-H3 correlate with poor solubility (Raybould et al., mAbs 2019)."
+Antibody_C,VH,CDR3,F,F->Y,tune polarity,

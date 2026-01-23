@@ -1,0 +1,16 @@
+Antibody,CDR,mutation,reason
+Antibody_A,CDR3,F/W/Y -> S/T (aromatic->polar),reduce non-specific hydrophobic interactions
+Antibody_A,CDR3,K/R -> Q/N (reduce excessive positive charge),lower charge driven non-specific binding
+Antibody_A,CDR3,Introduce small polar at midpoint,increase solubility/colloidal stability
+4lvh,CDR1,F/W/Y -> S/T (aromatic->polar),reduce non-specific hydrophobic interactions
+4lvh,CDR1,K/R -> Q/N (reduce excessive positive charge),lower charge driven non-specific binding
+4lvh,CDR1,Introduce small polar at midpoint,increase solubility/colloidal stability
+Antibody_C,CDR3,F/W/Y -> S/T (aromatic->polar),reduce non-specific hydrophobic interactions
+Antibody_C,CDR3,K/R -> Q/N (reduce excessive positive charge),lower charge driven non-specific binding
+Antibody_C,CDR3,Introduce small polar at midpoint,increase solubility/colloidal stability
+Antibody_B,CDR3,F/W/Y -> S/T (aromatic->polar),reduce non-specific hydrophobic interactions
+Antibody_B,CDR3,K/R -> Q/N (reduce excessive positive charge),lower charge driven non-specific binding
+Antibody_B,CDR3,Introduce small polar at midpoint,increase solubility/colloidal stability
+1bvl,CDR2,F/W/Y -> S/T (aromatic->polar),reduce non-specific hydrophobic interactions
+1bvl,CDR2,K/R -> Q/N (reduce excessive positive charge),lower charge driven non-specific binding
+1bvl,CDR2,Introduce small polar at midpoint,increase solubility/colloidal stability
